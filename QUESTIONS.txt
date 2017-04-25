@@ -1,0 +1,9 @@
+1.What is the fifth file that I have to include in TestCart2.php?
+
+
+1. require 'item.php';
+2. require 'cart.php';
+3. require 'product.php';
+4. require 'mock_product_db.php';
+
+2. How do we get a category in cart/index.php???
