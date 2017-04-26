@@ -1,4 +1,6 @@
 <?php
+
+require_once 'database.php';
 class ProductDB {
     public static function getProductsByCategory($category_id) {
         $db = Database::getDB();

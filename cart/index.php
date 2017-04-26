@@ -4,6 +4,9 @@
 
 require_once '../model/cart.php';
 require_once '../model/product_db.php';
+require_once '../model/product.php';
+require_once '../model/category_db.php';
+require_once '../model/category.php';
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -12,7 +15,6 @@ if ($action == NULL) {
         $action = 'view';
     }
 }
-echo $action;
 //exit();
 //adding cart array to the session
 if (!isset($_SESSION['cart'])) {
@@ -33,18 +35,14 @@ switch ($action) {
         } elseif ($quantity < 1) {
             display_error('Quantity must be 1 or more.');
         }
-
-//        cart_add_item($product_id, $quantity);
-       
+        //get product object from the DB
+       $product = ProductDB::getProduct($product_id);
         $_SESSION['cart']->addItem($product_id, $quantity);
-        //
-        //this is questionable where do we get $category_id????
-        //
-        $_SESSION['last_category_id'] = $current_category['categoty_id'];
-        
+
+        $_SESSION['last_category_id'] = $product->getCategory()->getId();
         $_SESSION['last_category_name'] = 
-                CategoryDB::getCategory($category_id)->getName();
-//        $cart = cart_get_items();
+                CategoryDB::getCategory($_SESSION['last_category_id'])
+                                                              ->getName();
         $cart = $_SESSION['cart']->getItems();        
         break;
     case 'update':

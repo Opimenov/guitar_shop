@@ -15,7 +15,9 @@
                 <th class="right">Total</th>
             </tr>
 <!--             foreach ($cart as $product_id => $item) :   -->
-                <?php foreach ($cart as $item) : ?>
+                <?php 
+                print_r($cart); 
+                foreach ($_SESSION['cart']->getItems() as $item) : ?>
             <tr>
                 <td><?php echo htmlspecialchars($item->getName()); ?></td>
                 <td class="right">
@@ -34,7 +36,8 @@
             <tr id="cart_footer" >
                 <td colspan="3" class="right" ><b>Subtotal</b></td>
                 <td class="right">
-                    <?php echo sprintf('$%.2f', $cart->getSubtotal()); ?>
+                    <?php 
+                    echo sprintf('$%.2f', $_SESSION['cart']->getSubtotal()); ?>
                 </td>
             </tr>
             <tr>
@@ -51,7 +54,7 @@
 
     <!-- display most recent category -->
     <?php if (isset($_SESSION['last_category_id'])) :
-            $category_url = '../catalog' .
+            $category_url = '../product_catalog' .
                 '?category_id=' . $_SESSION['last_category_id'];
         ?>
         <p>Return to: <a href="<?php echo $category_url; ?>">
@@ -61,7 +64,7 @@
     <!-- if cart has items, display the Checkout link -->
     <?php if ($_SESSION['cart']->productCount() > 0) : ?>
         <p>
-            Proceed to: <a href="../checkout">Checkout</a>
+            Proceed to: <a href="../checkout">object not found error</a>
         </p>
     <?php endif; ?>
 </main>

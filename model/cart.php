@@ -1,5 +1,7 @@
 <?php
 
+require_once 'item.php';
+
 class Cart {
     //create an empty array first
     private $itemQty;
@@ -44,6 +46,7 @@ class Cart {
             $item_object->setName($product->getName());
             $item_object->setUnit_price($unit_price);
             $item_object->setLine_price($line_price);
+            print_r($item_object);
             $ar[] = $item_object;
         }
 //        print_r($ar);
